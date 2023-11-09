@@ -1,0 +1,29 @@
+﻿@model List<ProductModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+ 
+<div class="form-horizontal" ng-app="myAutocompleteApp" ng-controller="autocompletecontroller">
+            <div class="form-group">
+            <label for="Productlist" class="control-label col-md-2">Product Search</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text" ng-model="searchText" list="names">
+                <datalist style="display:none;" id="names" class="form-control">
+                <option ng-repeat="prod in products | filter:{Name:searchText} | limitTo:10" value="{{prod.Name}}">
+                    {{prod.ProductSubCategory.ProductCategory.Name}} -> {{prod.ProductSubCategory.Name}} / Price : {{prod.UnitPrice}} / Available Qty: {{prod.Quantity}}
+                </option>
+                </datalist>
+            </div>
+        </div>
+</div>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_AngularjsScriptsPartial");}
+    <script type="text/javascript">
+        var myapp = angular.module("myAutocompleteApp", ["ui.bootstrap"]);
+        myapp.controller("autocompletecontroller", function($scope) {
+            $scope.searchText = '';
+            $scope.products = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model)); 
+        });
+    </script>
+}

@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "angular.js@1.8.3",
+      "destination": "wwwroot/lib/angular.js/"
+    },
+    {
+      "library": "angular-ui-bootstrap@2.5.6",
+      "destination": "wwwroot/lib/angular-ui-bootstrap/"
+    }
+  ]
+}
